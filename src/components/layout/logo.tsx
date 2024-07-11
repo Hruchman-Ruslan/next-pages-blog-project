@@ -1,5 +1,7 @@
+import classes from "./logo.module.css";
+
 export interface LogoProps {}
 
 export default function Logo({}: LogoProps) {
-  return <div>Ruslan Next Blog</div>;
+  return <div className={classes.logo}>Ruslan Next Blog</div>;
 }
