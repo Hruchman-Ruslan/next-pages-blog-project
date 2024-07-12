@@ -1,41 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { IPost } from "@/types/post";
+
 import classes from "./post-item.module.css";
 
 export interface PostItemProps {
-  title: string;
-  image: string;
-  excerpt: string;
-  date: string;
-  slug: string;
+  post: IPost;
 }
 
-export default function PostItem({
-  title,
-  image,
-  excerpt,
-  date,
-  slug,
-}: PostItemProps) {
-  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+export default function PostItem({ post }: PostItemProps) {
+  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-  const imagePath = `/images/posts/${slug}/${image}`;
+  const imagePath = `/images/posts/${post.slug}/${post.image}`;
+  const linkPath = `/posts/${post.slug}`;
 
   return (
     <li className={classes.post}>
-      <Link href={slug}>
+      <Link href={linkPath}>
         <div className={classes.image}>
-          <Image src={imagePath} alt={title} width={300} height={200} />
+          <Image
+            src={imagePath}
+            alt={post.title}
+            width={300}
+            height={200}
+            layout="responsive"
+          />
         </div>
         <div className={classes.content}>
-          <h3>{title}</h3>
+          <h3>{post.title}</h3>
           <time>{formattedDate}</time>
-          <p>{excerpt}</p>
+          <p>{post.excerpt}</p>
         </div>
       </Link>
     </li>
