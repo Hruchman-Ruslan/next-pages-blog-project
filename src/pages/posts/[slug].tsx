@@ -1,9 +1,7 @@
+import PostContent from "@/components/posts/post-detail/post-content";
+
 export interface PosDetailPageProps {}
 
 export default function PosDetailPage({}: PosDetailPageProps) {
-  return (
-    <div>
-      <h1>PosDetailPage</h1>
-    </div>
-  );
+  return <PostContent />;
 }
