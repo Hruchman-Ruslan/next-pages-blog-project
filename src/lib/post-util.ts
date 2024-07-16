@@ -3,9 +3,11 @@ import path from "path";
 
 import matter from "gray-matter";
 
-const postDirectory = path.join(process.cwd(), "posts");
+import { PostData } from "@/types/post-data";
 
-function getPostData(fileName: string) {
+const postDirectory = path.join(process.cwd(), "src/posts");
+
+function getPostData(fileName: string): PostData {
   const filePath = path.join(postDirectory, fileName);
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContent);
@@ -18,10 +20,10 @@ function getPostData(fileName: string) {
     content,
   };
 
-  return postData;
+  return postData as PostData;
 }
 
-export function getAllPosts() {
+export function getAllPosts(): PostData[] {
   const postFiles = fs.readdirSync(postDirectory);
 
   const allPosts = postFiles.map((postFile) => {
