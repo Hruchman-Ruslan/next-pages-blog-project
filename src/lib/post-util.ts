@@ -7,12 +7,15 @@ import { PostData } from "@/types/post-data";
 
 const postDirectory = path.join(process.cwd(), "src/posts");
 
-function getPostData(fileName: string): PostData {
-  const filePath = path.join(postDirectory, fileName);
+export function getPostsFiles() {
+  return fs.readdirSync(postDirectory);
+}
+
+export function getPostData(postIdentifier: string): PostData {
+  const postSlug = postIdentifier.replace(/\.md$/, ""); // removes the file extension
+  const filePath = path.join(postDirectory, `${postSlug}.md`);
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContent);
-
-  const postSlug = fileName.replace(/\.md$/, ""); // removes the file extension
 
   const postData = {
     slug: postSlug,
@@ -24,7 +27,7 @@ function getPostData(fileName: string): PostData {
 }
 
 export function getAllPosts(): PostData[] {
-  const postFiles = fs.readdirSync(postDirectory);
+  const postFiles = getPostsFiles();
 
   const allPosts = postFiles.map((postFile) => {
     return getPostData(postFile);
