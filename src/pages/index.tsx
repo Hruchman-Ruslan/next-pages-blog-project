@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import { getFeaturedPosts } from "@/lib/post-util";
 
 import { IPost } from "@/types/post";
@@ -12,6 +14,13 @@ export interface HomePageProps {
 export default function HomePage({ posts }: HomePageProps) {
   return (
     <>
+      <Head>
+        <title>Welcome to my blog</title>
+        <meta
+          title="description"
+          content="I post about programming and web development"
+        />
+      </Head>
       <Hero />
       <FeaturedPosts posts={posts} />
     </>
