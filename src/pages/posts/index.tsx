@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import { IPost } from "@/types/post";
 
 import { getAllPosts } from "@/lib/post-util";
@@ -9,7 +11,18 @@ export interface AllPostsPageProps {
 }
 
 export default function AllPostsPage({ posts }: AllPostsPageProps) {
-  return <AllPosts posts={posts} />;
+  return (
+    <>
+      <Head>
+        <title>All Posts</title>
+        <meta
+          name="description"
+          content="A list of all programming-related tutorials and posts!"
+        />
+      </Head>
+      <AllPosts posts={posts} />
+    </>
+  );
 }
 
 export function getStaticProps() {

@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import type { GetStaticPropsContext } from "next";
 
 import { IPost } from "@/types/post";
@@ -11,7 +13,15 @@ export interface PosDetailPageProps {
 }
 
 export default function PosDetailPage({ post }: PosDetailPageProps) {
-  return <PostContent post={post} />;
+  return (
+    <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={post.content} />
+      </Head>
+      <PostContent post={post} />
+    </>
+  );
 }
 
 export function getStaticProps(context: GetStaticPropsContext) {
