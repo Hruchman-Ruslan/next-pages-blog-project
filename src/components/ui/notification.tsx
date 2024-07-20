@@ -1,3 +1,5 @@
+import ReactDOM from "react-dom";
+
 import { RequestStatus } from "../contact/contact-from";
 
 import classes from "./notification.module.css";
@@ -25,10 +27,15 @@ export default function Notification({
 
   const cssClasses = `${classes.notification} ${statusClasses}`;
 
-  return (
-    <div className={cssClasses}>
-      <h2>{title}</h2>
-      <p>{message}</p>
-    </div>
-  );
+  const notificationElement = document.getElementById("notifications");
+
+  return notificationElement
+    ? ReactDOM.createPortal(
+        <div className={cssClasses}>
+          <h2>{title}</h2>
+          <p>{message}</p>
+        </div>,
+        notificationElement
+      )
+    : null;
 }
