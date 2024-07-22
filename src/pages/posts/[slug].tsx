@@ -17,7 +17,7 @@ export default function PosDetailPage({ post }: PosDetailPageProps) {
     <>
       <Head>
         <title>{post.title}</title>
-        <meta name="description" content={post.content} />
+        <meta name="description" content={post.excerpt} />
       </Head>
       <PostContent post={post} />
     </>
